@@ -1,6 +1,7 @@
 package com.sahan.disher.category
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -13,6 +14,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -33,17 +35,20 @@ to do something i need to its got i ve got a bit of memory im going to keep hold
  */
 @Composable
 fun CategoryScreen(
-    viewmodel: CategoryViewModel = hiltViewModel()
+    viewmodel: CategoryViewModel = hiltViewModel(),
+    onItemClick: (category: String) -> Unit
 ) {
     val listOfCategories by remember {
         viewmodel.listOfCategories
     }
     Column {
-        Text("Category")
+        Text("Category", modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
         Spacer(modifier = Modifier.height(30.dp))
         LazyColumn {
             items(listOfCategories) { item ->
-                SingleCategoryItem(category = item)
+                SingleCategoryItem(category = item){ category ->
+                    onItemClick.invoke(category)
+                }
             }
         }
     }
@@ -52,13 +57,19 @@ fun CategoryScreen(
 @OptIn(ExperimentalCoilApi::class)
 @Composable
 fun SingleCategoryItem(
-    category: Category
+    category: Category,
+    onItemClick: (category: String) -> Unit
 ) {
     Card(
-        modifier = Modifier.padding(8.dp).fillMaxWidth(),
+        modifier = Modifier
+            .padding(8.dp)
+            .fillMaxWidth()
+            .clickable {
+                onItemClick.invoke(category.strCategory)
+            },
         elevation = 8.dp,
     ) {
-        Row (
+        Row(
             modifier = Modifier.padding(16.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
