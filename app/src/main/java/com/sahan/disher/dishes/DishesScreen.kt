@@ -55,3 +55,15 @@ fun DishesScreen(
     }
 
 }
+
+/**
+ No more do we have the ui holding on to state check.
+
+ For example no more like checkbox is checked, no more do those view widgets have that information
+
+ no more do we have a view model that says its checked and view saying yes its checked.
+ no more do we have that two sources of truth.
+
+ We only have one source of truth , is it checked and you tell the checkbox you are checked, render accordingly and thats it.
+ checkbox doesnt know anything its being told you are checked.
+ */

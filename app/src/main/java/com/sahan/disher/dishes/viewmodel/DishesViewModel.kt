@@ -22,6 +22,7 @@ class DishesViewModel @Inject constructor(
         get() = _dishesScreenState
 
     fun getDishesForCategory(catName: String) {
+        _dishesScreenState.value = DishesScreenState.Loading
         viewModelScope.launch {
             try {
                 val listDishes = getDishesUseCase(catName)
