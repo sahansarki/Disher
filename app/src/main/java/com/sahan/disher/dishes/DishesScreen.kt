@@ -37,18 +37,17 @@ fun DishesScreen(
         }
     }
 
-    val viewState by remember {
+    val viewStateWithRemember by remember {
         viewModel.dishesScreenState
     }
-    //val viewState = viewModel.dishesScreenState.value
 
-    when(viewState) {
+    when(val viewState = viewStateWithRemember) { // issue is because the class can mutate after the check
         is DishesScreenState.Success<*> -> {
-            Text(text = "Success ${(viewState as DishesScreenState.Success<*>).data}")
+            Text(text = "Success ${(viewState).data}")
         }
 
         is DishesScreenState.Error -> {
-            Text(text = "Success ${(viewState as DishesScreenState.Error).errorMessage}")
+            Text(text = "Success ${(viewState).errorMessage}")
         }
         else -> {
             Text(text = "Loading")
