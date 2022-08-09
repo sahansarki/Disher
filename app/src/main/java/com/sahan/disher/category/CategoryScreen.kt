@@ -29,9 +29,9 @@ This remember:
 essentially like giving our compose functions a little bit of memory in the compose function
 so when it gets recomposed as opposed to this list getting read and again and again and again
 what we've got is like this little slice of memory so its going to be like okay im going to read a list
-of categories im going to hold on to it and if this function gets recomposed remember we dont really have control
-of it it wont then again unless the values changed from the viewmodel it wont then again go oh i need to i need
-to do something i need to its got i ve got a bit of memory im going to keep hold of it which is clean.
+of categories im going to hold on to it and if this function gets recomposed ,remember we dont really have control
+of it it wont then again unless the values changed from the viewmodel ,it wont then again go oh i need to i need
+to do something i need to its got i ve got a bit of memory im going to keep hold of it which is clean. -- caching
  */
 @Composable
 fun CategoryScreen(

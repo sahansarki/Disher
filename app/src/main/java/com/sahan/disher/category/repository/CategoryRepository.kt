@@ -9,7 +9,7 @@ interface ICategoryRepository {
 }
 
 class CategoryRepository @Inject constructor(
-    val service: ICategoryService
+    private val service: ICategoryService
 ) : ICategoryRepository{
     override suspend fun getAllCategories(): CategoryResponse {
         return service.getAllCategories()

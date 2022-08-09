@@ -57,7 +57,7 @@ fun DisherApp() {
                 it.arguments?.getString("category")
             }
 
-            DishesScreen(categoryStr)
+            DishesScreen(category = categoryStr)
         }
     }
     //DishesScreen

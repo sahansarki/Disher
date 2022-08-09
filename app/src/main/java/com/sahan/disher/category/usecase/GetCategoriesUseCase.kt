@@ -11,7 +11,7 @@ interface IGetCategoriesUseCase {
 }
 
 class GetCategoriesUseCase @Inject constructor(
-    val repo: ICategoryRepository
+    private val repo: ICategoryRepository
 ) : IGetCategoriesUseCase {
 
     override suspend fun invoke(): CategoryResponse {
