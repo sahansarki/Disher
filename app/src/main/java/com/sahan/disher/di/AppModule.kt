@@ -9,12 +9,16 @@ import com.sahan.disher.dishes.repository.IDishesRepository
 import com.sahan.disher.dishes.service.IDishesService
 import com.sahan.disher.dishes.usecase.GetDishesUseCase
 import com.sahan.disher.dishes.usecase.IGetDishesUseCase
-import com.sahan.disher.service.ICategoryService
+import com.sahan.disher.category.service.ICategoryService
+import com.sahan.disher.detail.repository.DetailRepository
+import com.sahan.disher.detail.repository.IDetailRepository
+import com.sahan.disher.detail.service.IDetailService
+import com.sahan.disher.detail.usecase.GetDetailUseCase
+import com.sahan.disher.detail.usecase.IGetDetailUseCase
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.scopes.ActivityScoped
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -47,9 +51,23 @@ class AppModule {
         return retrofit.create(IDishesService::class.java)
     }
 
+    @Provides
+    @Singleton
+    fun provideDetailService(retrofit: Retrofit): IDetailService {
+        return retrofit.create(IDetailService::class.java)
+    }
+
     @Module
     @InstallIn(SingletonComponent::class)
     interface AppModuleInt {
+
+        @Binds
+        @Singleton
+        fun provideGetDetailRepository(repo: DetailRepository): IDetailRepository
+
+        @Binds
+        @Singleton
+        fun provideGetDetailUseCases(uc: GetDetailUseCase): IGetDetailUseCase
 
         @Binds
         @Singleton

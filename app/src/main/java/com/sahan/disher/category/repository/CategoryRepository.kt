@@ -1,7 +1,7 @@
 package com.sahan.disher.category.repository
 
 import com.sahan.disher.category.model.CategoryResponse
-import com.sahan.disher.service.ICategoryService
+import com.sahan.disher.category.service.ICategoryService
 import javax.inject.Inject
 
 interface ICategoryRepository {

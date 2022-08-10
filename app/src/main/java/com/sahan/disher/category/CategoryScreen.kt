@@ -11,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 //import androidx.compose.runtime.*
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -46,7 +45,7 @@ fun CategoryScreen(
         Spacer(modifier = Modifier.height(30.dp))
         LazyColumn {
             items(listOfCategories) { item ->
-                SingleCategoryItem(category = item){ category ->
+                SingleItem(title = item.strCategory, thumbnail = item.strCategoryThumb){ category ->
                     onItemClick.invoke(category)
                 }
             }
@@ -56,16 +55,17 @@ fun CategoryScreen(
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
-fun SingleCategoryItem(
-    category: Category,
-    onItemClick: (category: String) -> Unit
+fun SingleItem(
+    title: String,
+    thumbnail: String,
+    onClick : (category: String) -> Unit
 ) {
     Card(
         modifier = Modifier
             .padding(8.dp)
             .fillMaxWidth()
             .clickable {
-                onItemClick.invoke(category.strCategory)
+                onClick.invoke(title)
             },
         elevation = 8.dp,
     ) {
@@ -77,12 +77,12 @@ fun SingleCategoryItem(
             Image(
                 modifier = Modifier.size(80.dp),
                 painter = rememberImagePainter(
-                    category.strCategoryThumb
+                    thumbnail
                 ),
                 contentDescription = null
             )
             Text(
-                text = category.strCategory,
+                text = title,
                 fontSize = 24.sp
             )
         }

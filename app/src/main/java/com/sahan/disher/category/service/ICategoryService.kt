@@ -1,4 +1,4 @@
-package com.sahan.disher.service
+package com.sahan.disher.category.service
 
 import com.sahan.disher.category.model.CategoryResponse
 import retrofit2.http.GET

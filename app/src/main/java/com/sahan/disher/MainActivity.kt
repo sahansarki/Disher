@@ -15,6 +15,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
 import com.sahan.disher.category.CategoryScreen
+import com.sahan.disher.detail.DetailScreen
 import com.sahan.disher.dishes.DishesScreen
 import com.sahan.disher.ui.theme.DisherTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,6 +40,12 @@ fun DisherApp() {
      * composables - DishesScreen
      */
 
+    /**
+    Scaffold is basically you put this scaffold at the top layer of your app and it becomes like your window.
+    And your screens would fit into the content slot the scaffold you can obviously turn on and off like any of those features side drawer,
+    bottom nav , toolbar at the top all that stuff, floation action button
+     */
+
     val navComtroller = rememberNavController()
     //CategoryScreen()
     NavHost(navController = navComtroller, startDestination = "category") {
@@ -50,16 +57,29 @@ fun DisherApp() {
         }
 
         composable("dishes/{category}", arguments = listOf(navArgument("category") {
-             type = NavType.StringType
+            type = NavType.StringType
         })) {
             // it holds a little bit of memory every time this block gets recomposed.This remember will at least have like this sort of fake caching system.
             val categoryStr = remember {
                 it.arguments?.getString("category")
             }
 
-            DishesScreen(category = categoryStr)
+            DishesScreen(category = categoryStr) { dishID ->
+                navComtroller.navigate("detail/${dishID}")
+            }
         }
+
+        composable(route = "detail/{mealid}", arguments = listOf(navArgument("mealid") {
+            type = NavType.StringType
+        }), content = {
+            val mealStrId = remember {
+                it.arguments?.getString("mealid")
+            }
+
+            DetailScreen(mealID = mealStrId)
+        }
+        )
     }
-    //DishesScreen
+
 }
 
